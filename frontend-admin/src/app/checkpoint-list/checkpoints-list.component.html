@@ -1,0 +1,9 @@
+<div class="page-heading"><div><h1>Checkpoints</h1><p class="muted">All available points of interest.</p></div><a class="button is-success" routerLink="/create-checkpoint">Create checkpoint</a></div>
+<p *ngIf="error" role="alert" class="notification is-danger">{{error}}</p>
+<div class="table-container panel-card"><table class="table is-fullwidth" data-testid="checkpoints-table">
+  <thead><tr><th>Name</th><th>Location</th><th>Latitude</th><th>Longitude</th><th>Details</th><th></th></tr></thead>
+  <tbody><tr *ngFor="let cp of store.state.checkpoints" [attr.data-checkpoint-id]="cp.id">
+    <td>{{cp.name}}</td><td>{{cp.cpLocation}}</td><td>{{cp.gpsLat}}</td><td>{{cp.gpsLng}}</td><td>{{cp.details}}</td>
+    <td><button type="button" class="button is-small is-danger is-light" (click)="remove(cp.id)">Delete</button></td>
+  </tr><tr *ngIf="store.connected && store.state.checkpoints.length === 0"><td colspan="6">No checkpoints yet.</td></tr></tbody>
+</table></div>

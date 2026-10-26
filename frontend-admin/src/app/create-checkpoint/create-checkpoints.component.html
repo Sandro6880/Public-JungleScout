@@ -1,0 +1,12 @@
+<h1>Create checkpoint</h1>
+<form class="panel-card form-panel" (ngSubmit)="submit()" #form="ngForm">
+  <p *ngIf="error" role="alert" class="notification is-danger">{{error}}</p>
+  <label class="label" for="cp-name">Name</label><input id="cp-name" data-testid="checkpoint-name" class="input" name="name" [(ngModel)]="draft.name" required maxlength="160">
+  <label class="label" for="cp-location">Location</label><input id="cp-location" class="input" name="location" [(ngModel)]="draft.cpLocation" maxlength="250">
+  <div class="coordinate-fields">
+    <div><label class="label" for="cp-lat">Latitude</label><input id="cp-lat" data-testid="checkpoint-lat" class="input" name="lat" [(ngModel)]="draft.gpsLat" type="number" step="any" min="-90" max="90" required></div>
+    <div><label class="label" for="cp-lng">Longitude</label><input id="cp-lng" data-testid="checkpoint-lng" class="input" name="lng" [(ngModel)]="draft.gpsLng" type="number" step="any" min="-180" max="180" required></div>
+  </div>
+  <label class="label" for="cp-details">Details</label><textarea id="cp-details" class="textarea" name="details" [(ngModel)]="draft.details" maxlength="4000"></textarea>
+  <button class="button is-success" type="submit" [disabled]="form.invalid || busy">{{busy ? 'Creating...' : 'Create checkpoint'}}</button>
+</form>

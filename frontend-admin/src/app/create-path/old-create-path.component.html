@@ -1,0 +1,88 @@
+<div>
+  <h2 class="subtitle">Create Path</h2>
+
+  <div class="table" style="width: 40%; margin: auto">
+    <table class="example-full-width">
+      <thead>
+      <tr>
+        <th title="NamePath">Name of the Path you want to create:</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th style="display: flex;">
+          <input class="input" type="text" [(ngModel)]="newPath.name"name="name">
+          <button mat-button *ngIf="newPath.name" matSuffix mat-icon-button aria-label="clear" (click)="newPath.name=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </th>
+      </tr>
+      </tbody>
+    </table>
+    <!--<table class="example-full-width">
+      <thead>
+      <tr>
+        <th title="PathLength">Estimated length of the total Path (in km)</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th style="display: flex">
+          <input class="input" placeholder="Number in km" type="text" [(ngModel)]="newPath.pathLength"name="length">
+          <button mat-button *ngIf="newPath.pathLength" matSuffix mat-icon-button aria-label="clear" (click)="newPath.pathLength=0">
+            <mat-icon>close</mat-icon>
+          </button>
+        </th>
+      </tr>
+      </tbody>
+    </table>
+    <table class="example-full-width">
+      <thead>
+      <tr>
+        <th title="PathDuration">Estimated duration of the total Path</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <input class="input" placeholder="hh:mm:ss" type="text" [(ngModel)]="newPath.pathDuration" name="duration">
+          <mat-hint align="start"><strong>The Format used here is -> hh:mm:ss</strong> </mat-hint>
+        </td>
+      </tr>
+      </tbody>
+    </table>-->
+    <table class="example-full-width">
+      <thead>
+      <tr>
+        <th title="PathLength">Pick out the Checkpoints you want this Path to have:</th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <div style="display: flex;justify-content: center; margin-top: 1vw">
+    <div class="control has-icons-left">
+      <div class="select">
+        <select  [multiple]="true" [(value)]="newPath.checkpoints">
+            <option *ngFor="let item of checkpoints" [value]="item">{{item.name}}</option>
+        </select>
+      </div>
+      <div class="icon is-small is-left">
+        <i class="fas fa-globe"></i>
+      </div>
+    </div>
+    <div>
+      <button class="button" (click)="submitPath()">Create</button>
+    </div>
+  </div>
+
+</div>
+<!--<div style="display: flex;justify-content: center; margin-top: -1vw">
+  <mat-form-field appearance="fill">
+    <mat-label>Available Checkpoints:</mat-label>
+    <mat-select [multiple]="true" [(value)]="newPath.checkpoints">
+      <div *ngFor="let item of checkpoints">
+        <mat-option [value]="item">{{item.name}}</mat-option>
+      </div>
+    </mat-select>
+  </mat-form-field>
+</div>-->

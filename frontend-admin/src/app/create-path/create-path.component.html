@@ -1,0 +1,12 @@
+<h1>Create path</h1>
+<form class="panel-card form-panel" (ngSubmit)="submit()" #form="ngForm">
+  <p *ngIf="error" role="alert" class="notification is-danger">{{error}}</p>
+  <label class="label" for="path-name">Path name</label><input id="path-name" data-testid="path-name" class="input" name="name" [(ngModel)]="name" required maxlength="160">
+  <fieldset><legend class="label">Checkpoints</legend><p class="muted">Choose checkpoints in the order the path should visit them.</p>
+    <label *ngFor="let cp of store.state.checkpoints" class="checkpoint-option" [attr.data-checkpoint-id]="cp.id">
+      <input type="checkbox" [checked]="selectedIds.includes(cp.id)" (change)="toggle(cp.id)"> {{cp.name}} <span class="muted">{{cp.cpLocation}}</span>
+    </label>
+  </fieldset>
+  <p class="muted">Selected: {{selectedIds.length}}. A path can also be created without checkpoints.</p>
+  <button class="button is-success" type="submit" [disabled]="form.invalid || busy">{{busy ? 'Creating...' : 'Create path'}}</button>
+</form>

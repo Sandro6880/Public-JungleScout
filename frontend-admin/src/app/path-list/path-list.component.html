@@ -1,0 +1,14 @@
+<div class="page-heading"><div><h1>Jungle paths</h1><p class="muted">Create and manage walks and their checkpoints.</p></div><a class="button is-success" routerLink="/create-path">Create path</a></div>
+<div class="table-container panel-card">
+  <table class="table is-fullwidth" data-testid="paths-table">
+    <thead><tr><th>Name</th><th>Duration</th><th>Length (km)</th><th>Checkpoints</th><th></th></tr></thead>
+    <tbody>
+      <tr *ngFor="let path of store.state.paths" [attr.data-path-id]="path.id">
+        <td>{{path.name}}</td><td>{{path.pathDuration}}</td><td>{{path.pathLength}}</td><td>{{path.checkpoints.length}}</td>
+        <td><a class="button is-small" [routerLink]="['/path-view', path.id]">Edit path</a></td>
+      </tr>
+      <tr *ngIf="store.connected && store.state.paths.length === 0"><td colspan="5">No paths yet. Create one to begin.</td></tr>
+    </tbody>
+  </table>
+</div>
+<p *ngIf="store.localMock" class="muted">Local data updates automatically. Changes last until the local test API is restarted.</p>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/overviewPathFragment">
+    <fragment
+        android:id="@+id/overviewPathFragment"
+        android:name="at.htl.android_frontend.overview.OverviewFragment"
+        android:label="fragment_path_overview"
+        tools:layout="@layout/fragment_path_overview" >
+        <action
+            android:id="@+id/action_showDetail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="at.htl.android_frontend.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="selectedProperty"
+            app:argType="at.htl.android_frontend.network.Path"
+            />
+        <action
+            android:id="@+id/action_detailFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_showCheckpointDetail"
+            app:destination="@id/checkpointDetailFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_overviewPathFragment"
+            app:destination="@id/overviewPathFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkpointDetailFragment"
+        android:name="at.htl.android_frontend.checkpoint.CheckpointDetailFragment"
+        android:label="fragment_checkpoint_detail"
+        tools:layout="@layout/fragment_checkpoint_detail">
+        <argument
+            android:name="selectedCheckpoint"
+            app:argType="at.htl.android_frontend.network.Checkpoint"
+            />
+        <action
+            android:id="@+id/action_checkpointDetailFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="at.htl.android_frontend.map.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps">
+        <argument
+            android:name="selectedProperty"
+            app:argType="at.htl.android_frontend.network.Path"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="at.htl.android_frontend.gallery.GalleryFragment"
+        android:label="GalleryFragment"
+        tools:layout="@layout/gallery_fragment">
+        <argument
+            android:name="photoProperty"
+            app:argType="at.htl.android_frontend.camera.Photobook" />
+    </fragment>
+</navigation>

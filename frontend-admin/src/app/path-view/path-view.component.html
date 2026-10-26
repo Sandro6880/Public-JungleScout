@@ -1,0 +1,35 @@
+<p *ngIf="error" role="alert" class="notification is-danger">{{error}}</p>
+<section *ngIf="loaded" [attr.data-path-id]="currentRfp.id" data-testid="path-detail">
+  <div class="page-heading"><h1 data-testid="path-heading">{{currentRfp.name}}</h1><a routerLink="/paths">Back to paths</a></div>
+  <div class="details-layout">
+    <div class="panel-card">
+      <label class="label" for="edit-path-name">Path name</label><input id="edit-path-name" class="input" [(ngModel)]="currentRfp.name" (ngModelChange)="dirty = true" maxlength="160">
+      <p class="metric">Duration: <strong>{{currentRfp.pathDuration}}</strong></p>
+      <p class="metric">Length: <strong>{{currentRfp.pathLength}} km</strong></p>
+      <p *ngIf="store.localMock" class="muted">Distance follows straight segments. Walking time is estimated at 5 km/h.</p>
+      <p *ngIf="dirty" class="notification is-warning is-light">You have unsaved path changes.</p>
+      <div class="checkpoint-actions"><button type="button" class="button is-success" (click)="savePath()" [disabled]="busy || !currentRfp.name.trim()">Save path</button><button type="button" class="button is-danger is-light" (click)="deletePath()" [disabled]="busy">Delete path</button></div>
+    </div>
+    <div><app-local-map [checkpoints]="currentRfp.checkpoints" (pointSelected)="prepareCheckpoint($event)"></app-local-map></div>
+  </div>
+  <form *ngIf="mapDraft" class="panel-card form-panel" (ngSubmit)="addMapCheckpoint()" #mapForm="ngForm">
+    <h2>Create a checkpoint at this position</h2>
+    <p class="muted">{{mapDraft.gpsLat}}, {{mapDraft.gpsLng}}</p>
+    <label class="label" for="map-cp-name">Name</label><input id="map-cp-name" class="input" name="mapName" [(ngModel)]="mapDraft.name" required maxlength="160">
+    <label class="label" for="map-cp-location">Location</label><input id="map-cp-location" class="input" name="mapLocation" [(ngModel)]="mapDraft.cpLocation">
+    <label class="label" for="map-cp-details">Details</label><textarea id="map-cp-details" class="textarea" name="mapDetails" [(ngModel)]="mapDraft.details"></textarea>
+    <button class="button is-success" type="submit" [disabled]="mapForm.invalid || busy">Create and attach</button><button type="button" class="button" (click)="mapDraft = null">Cancel</button>
+  </form>
+  <div class="panel-card"><h2>Available checkpoints</h2><p class="muted">Choose points here, then save the path. Reorder attached points below.</p>
+    <label *ngFor="let cp of store.state.checkpoints" class="checkpoint-option"><input type="checkbox" [checked]="hasCheckpoint(cp.id)" (change)="toggleCheckpoint(cp)"> {{cp.name}}</label>
+  </div>
+  <h2>Attached checkpoints</h2><p *ngIf="currentRfp.checkpoints.length === 0" class="muted">This path has no checkpoints.</p>
+  <details *ngFor="let cp of currentRfp.checkpoints; let i = index" class="panel-card checkpoint-editor" [attr.data-checkpoint-id]="cp.id">
+    <summary>{{i + 1}}. {{cp.name}}</summary>
+    <label class="label" [for]="'edit-cp-name-' + cp.id">Name</label><input class="input" [id]="'edit-cp-name-' + cp.id" [(ngModel)]="cp.name">
+    <label class="label" [for]="'edit-cp-location-' + cp.id">Location</label><input class="input" [id]="'edit-cp-location-' + cp.id" [(ngModel)]="cp.cpLocation">
+    <div class="coordinate-fields"><div><label class="label" [for]="'edit-cp-lat-' + cp.id">Latitude</label><input class="input" [id]="'edit-cp-lat-' + cp.id" [(ngModel)]="cp.gpsLat" type="number" min="-90" max="90" step="any"></div><div><label class="label" [for]="'edit-cp-lng-' + cp.id">Longitude</label><input class="input" [id]="'edit-cp-lng-' + cp.id" [(ngModel)]="cp.gpsLng" type="number" min="-180" max="180" step="any"></div></div>
+    <label class="label" [for]="'edit-cp-details-' + cp.id">Details</label><textarea class="textarea" [id]="'edit-cp-details-' + cp.id" [(ngModel)]="cp.details"></textarea>
+    <div class="checkpoint-actions"><button type="button" class="button" (click)="move(i, -1)" [disabled]="i === 0">Move up</button><button type="button" class="button" (click)="move(i, 1)" [disabled]="i === currentRfp.checkpoints.length - 1">Move down</button><button type="button" class="button is-success is-light" (click)="updateCheckpoint(cp)" [disabled]="busy">Save checkpoint</button><button type="button" class="button is-danger is-light" (click)="toggleCheckpoint(cp)">Detach from path</button></div>
+  </details>
+</section>

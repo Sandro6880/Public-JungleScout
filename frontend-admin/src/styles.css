@@ -1,0 +1,26 @@
+* { box-sizing:border-box; }
+body { margin:0; background:#f6f8f6; color:#25322a; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+h1 { font-size:1.8rem; font-weight:650; margin-bottom:1rem; }
+h2 { font-size:1.2rem; font-weight:650; margin-bottom:1rem; }
+.page-heading { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem; }
+.page-heading h1 { margin-bottom:.25rem; }
+.muted { color:#626e65; font-size:.9rem; }
+.panel-card { background:white; border:1px solid #dfe6df; border-radius:8px; padding:1.25rem; margin-bottom:1.25rem; }
+.form-panel { max-width:760px; }
+.table { margin-bottom:0; }
+.table th { white-space:nowrap; }
+.form-panel .label { margin-top:1rem; }
+.form-panel button[type=submit] { margin-top:1.25rem; }
+.coordinate-fields { display:flex; gap:1rem; }
+.coordinate-fields > div { flex:1; min-width:0; }
+fieldset { margin:1.5rem 0; }
+.checkpoint-option { display:flex; gap:.6rem; align-items:center; margin:.75rem 0; }
+.button { white-space:nowrap; }
+.button + .button { margin-left:.5rem; }
+.details-layout { display:grid; grid-template-columns:minmax(220px,1fr) minmax(300px,2fr); gap:1.25rem; }
+.checkpoint-editor { margin:1rem 0; }
+.checkpoint-editor summary { cursor:pointer; font-weight:600; }
+.checkpoint-editor input,.checkpoint-editor textarea { margin:.5rem 0; }
+.checkpoint-actions { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem; }
+.checkpoint-actions .button { margin-left:0; }
+@media(max-width:760px) { .details-layout { grid-template-columns:1fr; } .coordinate-fields { flex-direction:column; } }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright 2019, The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="at.htl.android_frontend.detail.DetailViewModel" />
+    </data>
+    <ScrollView
+        android:id="@+id/fragment_path_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/forest_path"
+        tools:context=".DetailFragment"
+        tools:ignore="FragmentTagUsage">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/path_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="#de000000"
+                android:background="#99FFFFFF"
+                android:textSize="39sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:text="@{viewModel.selectedProperty.name}"
+                tools:ignore="MissingConstraints"
+                tools:text="Path Name" />
+
+            <TextView
+                android:id="@+id/path_length_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/path_length"
+                android:background="#99FFFFFF"
+                android:textColor="#de000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/path_name"
+                tools:text="Path length:" />
+
+            <TextView
+                android:id="@+id/path_length"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#99FFFFFF"
+                android:textColor="#de000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/path_length_label"
+                app:layout_constraintTop_toBottomOf="@+id/path_name"
+                app:text="@{viewModel.selectedProperty.pathLength}"
+                tools:text="Path length " />
+
+            <TextView
+                android:id="@+id/path_duration_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/path_duration"
+                android:background="#99FFFFFF"
+                android:textColor="#de000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/path_length"
+                tools:text="Path Duration:" />
+
+            <TextView
+                android:id="@+id/path_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#99FFFFFF"
+                android:textColor="#de000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/path_duration_label"
+                app:layout_constraintTop_toBottomOf="@+id/path_length"
+                app:text="@{viewModel.selectedProperty.pathDuration}"
+                tools:text="Path duration:" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#DDFFFFFF"
+                android:text="@string/start_route"
+                android:layout_marginTop="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/path_duration"/>
+            <Button
+                android:id="@+id/print_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:background="#DDFFFFFF"
+                android:text="@string/end_tour"
+                android:layout_marginTop="10sp"
+                app:layout_constraintStart_toEndOf="@id/button"
+                app:layout_constraintTop_toBottomOf="@+id/path_duration"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/checkpoint_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:checkpointData="@{viewModel.propertyCheckpoint}"
+                app:spanCount="1"
+                tools:itemCount="5"
+                tools:listitem="@layout/checkpoint_view_item"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

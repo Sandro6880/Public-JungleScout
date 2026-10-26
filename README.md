@@ -1,1 +1,2 @@
-# Public-JungleScout
+# jungle-scout
+

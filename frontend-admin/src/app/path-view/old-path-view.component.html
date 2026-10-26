@@ -1,0 +1,125 @@
+<div class="borders">
+  <H2>Details of Path: {{currentRfp.name}}</H2>
+  <table class="table">
+    <tr>
+      <td>
+        <div class="card-content">
+          <label class="label">Path Name:</label>
+          <input class="input" type="text" [ngModel]="currentRfp.name">
+          <label class="label" style="margin-top: 2vw;">Path duration:</label>
+          <input class="input" type="text" [(ngModel)]="currentRfp.pathDuration"name="duration">
+          <mat-hint align="start"><strong>The Format used here is -> hh:mm:ss</strong> </mat-hint>
+          <label class="label" style="margin-top: 2vw;">Path length in km:</label>
+          <input class="input" type="text" [(ngModel)]="currentRfp.pathLength"name="length">
+        </div>
+      </td>
+      <td>
+        <div>
+          <agm-map [latitude]="returnNumber(agmCheckpoint.gpsLat)" [longitude]="returnNumber(agmCheckpoint.gpsLng)">
+          <!--<agm-map [latitude]="48.26795621309598" [longitude]="14.25210478277097">-->
+            <!--<div *ngFor="let cp of currentRfp.checkpoints">
+              <agm-marker [latitude]="+cp.gpsLat" [longitude]="+cp.gpsLng"></agm-marker>
+            </div>-->
+            <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints"></agm-direction>
+          </agm-map>
+        </div>
+      </td>
+    </tr>
+    <tr style="justify-content: center">
+      <td>
+        <div>
+          <div class="mat-expansion-panel">
+            <section class="modal-card-body">
+              <mat-accordion>
+                <mat-expansion-panel style="margin-top: 1vw" *ngFor="let cp of currentRfp.checkpoints; let i = index" [attr.data-index]="i">
+                  <mat-expansion-panel-header (click)="setCurrentCheckPoint(cp)">
+                    <mat-panel-title style="margin-right: 3vw" [ngClass]="{'has-background-grey-light': currentCheckpoint === cp}">
+                      {{i + " " + cp.name}}
+                    </mat-panel-title>
+                    <mat-panel-description style="justify-content: right">
+                      {{cp.details}}
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div style="display: flex; flex-direction: row; justify-content: space-evenly; margin-top: 1vw">
+                    <div style="height: inherit;width: inherit; display: flex; justify-content: left">
+                      <h3 class="subtitle" style="margin-top: 1vw;margin-right: 1vw">Checkpoint name:</h3>
+                      <div style=" margin-top: -1vw">
+                        <input class="input" style="margin-top: 1vw;width: 25vw" type="text" [(ngModel)]="cp.name">
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+                    <div style="justify-content: center">
+                      <h3 class="subtitle" style="margin-top: 1vw">GPX Location</h3>
+                      <div style="display: flex; justify-content: center; margin-top: -1vw">
+                        <input class="input" style="margin-top: 1vw;margin-right: 0.2vw" type="text" [(ngModel)]="cp.gpsLat">
+                        <input class="input" style="margin-top: 1vw" type="text" [(ngModel)]="cp.gpsLng">
+                      </div>
+                    </div>
+                    <div style="justify-content: center">
+                      <h3 class="subtitle" style="margin-top: 1vw">Checkpoint Location</h3>
+                      <div style="display: flex; justify-content: center; margin-top: -1vw">
+                        <input class="input" style="margin-top: 1vw" type="text" [(ngModel)]="cp.cpLocation">
+                      </div>
+                    </div>
+                    <button (click)="removeItem(i)">Remove</button>
+                  </div>
+                  <div style="display: flex; flex-direction: row; justify-content: left; margin-top: 1vw">
+                    <div style="display: flex;">
+                      <h3 class="subtitle" style="margin-left: 0.5vw;margin-top: 1vw;margin-right: 1vw">Checkpoint Details:</h3>
+                      <div style=" margin-top: -1vw">
+                        <textarea class="textarea" style="margin-top: 1vw;width: 23.5vw" type="text" [(ngModel)]="cp.details"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </section>
+          </div>
+        </div>
+        <div style="display: flex; margin-bottom: 0vw">
+          <mat-icon (click)="moveUp()" style="margin-right: 2vw;cursor: pointer; font-size: 250%" aria-hidden="false" aria-label="Example home icon">chevron_left</mat-icon>
+          <mat-icon (click)="moveDown()" style="cursor: pointer; font-size: 250%; margin-right: 20.7vw" aria-hidden="false" aria-label="Example home icon">chevron_right</mat-icon>
+          <button class = "button" style="margin-right: 1vw" (click)="update()">Update Checkpoints</button>
+          <button class = "button" (click)="onAddCheckpointButtonClick()">Manage Checkpoints</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="modal" [ngClass]="{'is-active': showModal}">
+  <div class="modal-background" (click)="closeModal()"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <button class="delete" (click)="closeModal()" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>GPX-Latitude</th>
+            <th>GPX-Longitude</th>
+            <th>Included</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cp of checkpoints">
+            <td>{{cp.name}}</td>
+            <td>{{cp.cpLocation}}</td>
+            <td>{{cp.gpsLat}}</td>
+            <td>{{cp.gpsLng}}</td>
+            <td><input type="checkbox" (click)="changeCP(cp)" [checked]="checkIfCheckpointInPath(cp)"></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button" style="margin-right: 2vw" (click)="submitChoices()">Submit</button>
+    </footer>
+  </div>
+</div>
+

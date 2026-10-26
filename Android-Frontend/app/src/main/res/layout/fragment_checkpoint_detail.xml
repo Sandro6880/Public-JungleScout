@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="at.htl.android_frontend.checkpoint.CheckpointDetailViewModel" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/checkpoint_detail_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/forest_path"
+        tools:context=".CheckpointDetailFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/checkpoint_detail_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="#de000000"
+                android:background="#99FFFFFF"
+                android:textSize="39sp"
+                app:text="@{viewModel.propertyCheckpoint.name}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Checkpoint Name" />
+            <TextView
+                android:id="@+id/checkpoint_detail_location_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="#de000000"
+                android:background="#99FFFFFF"
+                android:textSize="20sp"
+                android:text="@string/location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkpoint_detail_name"
+                tools:text="Location:" />
+            <TextView
+                android:id="@+id/checkpoint_detail_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="10dp"
+                android:textColor="#de000000"
+                android:background="#99FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/checkpoint_detail_location_desc"
+                app:layout_constraintTop_toBottomOf="@id/checkpoint_detail_name"
+                app:text="@{viewModel.propertyCheckpoint.cpLocation}"
+                tools:text="Checkpoint Location" />
+            <TextView
+                android:id="@+id/checkpoint_detail_detail_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="#de000000"
+                android:background="#99FFFFFF"
+                android:textSize="20sp"
+                android:text="@string/details"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkpoint_detail_location_desc"
+                tools:text="Details Test" />
+            <MultiAutoCompleteTextView
+                android:id="@+id/multiAutoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:editable="false"
+                android:text="@{viewModel.propertyCheckpoint.details}"
+                android:textSize="20sp"
+                android:background="#99FFFFFF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkpoint_detail_detail_desc"
+                tools:text="Checkpoint Details"/>
+            <Button
+                android:id="@+id/button_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#DDFFFFFF"
+                android:text="View Photo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/multiAutoCompleteTextView"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</layout>

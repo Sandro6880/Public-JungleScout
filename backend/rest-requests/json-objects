@@ -1,0 +1,52 @@
+Path:
+{
+  "name": "The School life experience of HTL-Leonding",
+  "pathDuration": "00:14:20",
+  "pathLength": 2.4
+}
+{
+  "name": "The full experience of HTL-Leonding",
+  "pathDuration": "02:23:00",
+  "pathLength": 5
+}
+{
+  "name": "Route of Adventure",
+  "pathDuration": "00:25:10",
+  "pathLength": 3.6
+}
+{
+  "name": "Route Without any ControlStations",
+  "pathDuration": "00:00:00",
+  "pathLength": 0
+}
+
+ControlStation:
+{
+  "cpLocation": "HTL-Leonding",
+  "name": "Checkpoint - HTL-Leonding",
+  "gpsLng": "14.25210478277097",
+  "gpsLat": "48.26795621309598",
+  "details": "This is the best higher technical college in Leonding"
+}
+  {
+    "cpLocation": "Kleingartenverein Grundbach",
+    "name": "Checkpoint - Kleingartenverein Grundbach",
+    "gpsLng": "14.250747577566402",
+    "gpsLat": "48.270032483898035",
+    "details": "This is the higher technical college FROM ELIAS"
+  }
+  {
+    "cpLocation": "Union Leonding",
+    "name": "Checkpoint - Union Leonding",
+    "gpsLng": "14.255692251705309",
+    "gpsLat": "48.26852420927118",
+    "details": "Just a test HTL for now"
+  }
+{
+  "cpLocation": "Kuernberghalle - Leonding",
+  "name": "Checkpoint - Kuernberghalle",
+  "gpsLng": "14.254476785249523",
+  "gpsLat": "48.26602842180752",
+  "details": "At the Kuernberghalle you can throw festivals and have meetings."
+}
+

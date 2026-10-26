@@ -1,0 +1,7 @@
+.app-header { display:flex; flex-wrap:wrap; align-items:center; gap:1.5rem; padding:1rem 2rem; background:#205b3c; color:white; }
+.brand { color:white; font-size:1.4rem; font-weight:700; white-space:nowrap; }
+nav { display:flex; flex-wrap:wrap; gap:1rem; }
+nav a { color:#e6f4e9; padding:.3rem 0; border-bottom:2px solid transparent; }
+nav a.active { color:white; border-color:#b6dfb6; }
+.connection { margin-left:auto; font-size:.85rem; color:#dbeddf; }
+main { max-width:1240px; margin:0 auto; padding:2rem 1.5rem 4rem; }

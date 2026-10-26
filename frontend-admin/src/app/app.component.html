@@ -1,0 +1,17 @@
+<header class="app-header">
+  <a class="brand" routerLink="/paths">Jungle Scout</a>
+  <nav aria-label="Admin navigation">
+    <a routerLink="/paths" routerLinkActive="active">Paths</a>
+    <a routerLink="/all-poi" routerLinkActive="active">Checkpoints</a>
+    <a routerLink="/create-path" routerLinkActive="active">Create path</a>
+    <a routerLink="/create-checkpoint" routerLinkActive="active">Create checkpoint</a>
+  </nav>
+  <span class="connection" data-testid="connection-status">
+    {{store.localMock ? 'Local demo' : 'Java API'}} · {{store.connected ? 'Connected' : 'Connecting'}}
+    <span *ngIf="store.localMock && store.state.revision >= 0"> · Revision {{store.state.revision}}</span>
+  </span>
+</header>
+<main [attr.data-rendered-revision]="store.state.revision">
+  <p *ngIf="store.error" role="alert" class="notification is-danger">{{store.error}}</p>
+  <router-outlet></router-outlet>
+</main>

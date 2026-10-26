@@ -1,0 +1,42 @@
+POST http://localhost:8080/api/paths
+Content-Type: application/json
+
+{
+  "name": "Route Without any ControlStations",
+  "pathDuration": "00:00:00",
+  "pathLength": 0
+}
+###
+
+GET http://localhost:8080/api/paths/1
+
+###
+GET https://maps.googleapis.com/maps/api/directions/json?origin=HTL-Leonding&destination=Union-Leonding&key=example_google_maps_api_key
+###
+
+POST http://localhost:8080/api/checkpoints
+Content-Type: application/json
+
+{
+  "cpLocation": "HTL-Leonding",
+  "name": "Checkpoint - HTL-Leonding",
+  "gpsLng": "14.25210478277097",
+  "gpsLat": "48.26795621309598",
+  "details": "This is the best higher technical college in Leonding"
+}
+
+###
+POST http://localhost:8080/api/paths/3/checkpoints
+Content-Type: application/json
+
+[
+  {
+    "name": "Checkpoint - Kuernberghalle"
+  },
+  {
+    "name": "Checkpoint - HTL-Leonding"
+  },
+  {
+    "name": "Checkpoint - Kleingartenverein Grundbach"
+  }
+]
